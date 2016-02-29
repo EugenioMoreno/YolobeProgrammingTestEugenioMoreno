@@ -3,7 +3,7 @@
  */
 package yolobe.test.eugenio;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -17,9 +17,6 @@ import org.json.JSONObject;
  *
  */
 public class JsonParser {
-	public static JSONArray itemsArray;
-	public static JSONArray contentArray= new JSONArray();
-	public static Opportunity[] opportunityArray;
 
 	/**
 	 * @param args[0]: URL of the endpoint
@@ -27,21 +24,39 @@ public class JsonParser {
 	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		//Get the url from the parameters
 		URL url = new URL(args[0]);
-		 
-	    // Reques JSON from the URL of the endpoint
+		//Obtain the string of the request
+	    String str = getJSONstring(url);
+	    
+		//Get and JSONArray with the items of the endpoint
+		JSONArray itemsArray=parseJSONstring(str);
+		
+		//Get the information about opportunities, users and networks
+		Opportunity[] opportunityArray= getContentInformation(itemsArray);
+		User[] userArray=getUserInformation(itemsArray);
+		Network[] networkArray=getNetworkInformation(itemsArray);
+		
+		//Print the requirements (title in ascending order and hits)
+	    printResults(opportunityArray);
+
+	}
+	/**
+	 * 
+	 * @param url of the discover endpoint
+	 * @return string with the JSON data
+	 * @throws IOException
+	 */
+	private static String getJSONstring(URL url) throws IOException {
+		// Request JSON from the URL of the endpoint
 	    Scanner scan= new Scanner(url.openStream());
 		String str = new String();
 		while (scan.hasNext()){
 			str += scan.nextLine();
 		}
-		//System.out.println(str);
-		scan.close();
 		
-		parseJSONstring(str);
-	    getContentInformation();
-	    printResults();
-
+		scan.close();
+		return str;
 	}
 	
 	/**
@@ -49,21 +64,24 @@ public class JsonParser {
 	 * printing the titles in alphabetical order.
 	 * And display the average number of hits per presented Opportunity
 	 */
-	private static void printResults() {
+	private static void printResults(Opportunity[] opportunityArray) {
 		// TODO Auto-generated method stub
 		//Sort the array by title
 		Arrays.sort(opportunityArray,Opportunity.TitleComparator);
 		for (int i = 0; i < opportunityArray.length; i++) {
-			
 			System.out.println(opportunityArray[i].toString());
 		}
 		
 	}
 	/**
-	 * This method creates Opportunity objects from the JSON objects
+	 * This method creates opportunity objects from the JSON objects
+	 * @param itemsArray items of the JSON file
+	 * @return array of opportunity objects with id, title and number of hits
 	 * @throws JSONException
 	 */
-	protected static void getContentInformation() throws JSONException {
+	protected static Opportunity[] getContentInformation(JSONArray itemsArray) throws JSONException {
+		JSONArray contentArray= new JSONArray();
+		Opportunity[] opportunityArray=new Opportunity[itemsArray.length()];
 		
 		for (int i = 0; i < itemsArray.length(); i++) {
 	       	JSONObject auxItem=itemsArray.getJSONObject(i);
@@ -77,6 +95,54 @@ public class JsonParser {
 	    	//New Opportunity object
 	    	opportunityArray[i]=new Opportunity(id, title, hits);
 	    }
+		
+		return opportunityArray;
+	}
+	/**
+	 * This method creates user objects from the JSON objects
+	 * @param itemsArray items of the JSON file
+	 * @return array of user objects with id and name
+	 * @throws JSONException
+	 */
+	protected static User[] getUserInformation(JSONArray itemsArray) throws JSONException {
+		JSONArray userJSONArray= new JSONArray();
+		User[] userArray=new User[itemsArray.length()];
+		for (int i = 0; i < itemsArray.length(); i++) {
+	    	
+	    	JSONObject auxItem=itemsArray.getJSONObject(i);
+	    	userJSONArray.put(auxItem.getJSONObject("user"));
+	    	
+	    	//Auxiliary variables for the string that we are looking for
+	    	int id=userJSONArray.getJSONObject(i).getInt("id");
+	    	String name=userJSONArray.getJSONObject(i).getString("name");
+	    		    	
+	    	//New Opportunity object
+	    	userArray[i]=new User(id, name);
+	    }
+		return userArray;
+	}
+	/**
+	 * This method creates network objects from the JSON objects
+	 * @param itemsArray items of the JSON file
+	 * @return array of network objects with id and name
+	 * @throws JSONException
+	 */
+	protected static Network[] getNetworkInformation(JSONArray itemsArray) throws JSONException {
+		JSONArray networkJSONArray= new JSONArray();
+		Network [] networkArray=new Network[itemsArray.length()];
+		for (int i = 0; i < itemsArray.length(); i++) {
+	    	
+	    	JSONObject auxItem=itemsArray.getJSONObject(i);
+	    	networkJSONArray.put(auxItem.getJSONObject("network"));
+	    	
+	    	//Auxiliary variables for the string that we are looking for
+	    	int id=networkJSONArray.getJSONObject(i).getInt("id");
+	    	String name=networkJSONArray.getJSONObject(i).getString("name");
+	    		    	
+	    	//New Opportunity object
+	    	networkArray[i]=new Network(id, name);
+	    }
+		return networkArray;
 	}
 	
 	/**
@@ -84,13 +150,12 @@ public class JsonParser {
 	 * @param str is the String that was obtained from the discover endpoint 
 	 * @throws JSONException
 	 */
-	protected static void parseJSONstring(String str) throws JSONException {
-		// Build a JSON object from the string obtained on the endpoint
+	protected static JSONArray parseJSONstring(String str) throws JSONException {
+		// Build a JSON object from the string obtained on the endpoint site
 	    JSONObject obj = new JSONObject(str);
 	    //Get the items of the file
-	    itemsArray = obj.getJSONArray("items");
-	    //Initialize the array with Opportunity objects with the same length
-	    opportunityArray=new Opportunity[itemsArray.length()];
+	    JSONArray itemsArray = obj.getJSONArray("items"); 
+	    return itemsArray;
 	}
 }
 

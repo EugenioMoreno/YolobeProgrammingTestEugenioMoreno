@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.junit.Test;
 
@@ -29,69 +30,76 @@ public class JsonParserTest {
 	public void threeDifferentItems() {
 		//Having
 		setUp();
+		JSONArray itemsArray=new JSONArray();
 		//When
 		try {
-			JsonParser.parseJSONstring(jsonString);
+			itemsArray=JsonParser.parseJSONstring(jsonString);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//Then
-		assertEquals(3, JsonParser.itemsArray.length());
+		assertEquals(3, itemsArray.length());
 	}
 	
 	@Test
 	public void opportunityTitles() {
 		//Having
 		setUp();
+		JSONArray itemsArray=new JSONArray();
+		Opportunity[] opportunityArray=new Opportunity[itemsArray.length()];
 		//When
 		try {
-			JsonParser.parseJSONstring(jsonString);
-			JsonParser.getContentInformation();
+			itemsArray=JsonParser.parseJSONstring(jsonString);
+			opportunityArray=JsonParser.getContentInformation(itemsArray);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//Then
-		assertEquals("My first post", JsonParser.opportunityArray[0].getTitle());
-		assertEquals("Second Post", JsonParser.opportunityArray[1].getTitle());
-		assertEquals("Breaking the test", JsonParser.opportunityArray[2].getTitle());
+		assertEquals("My first post", opportunityArray[0].getTitle());
+		assertEquals("Second Post", opportunityArray[1].getTitle());
+		assertEquals("Breaking the test", opportunityArray[2].getTitle());
 	}
 	
 	@Test
 	public void alphabeticalOrderTitles() {
 		//Having
 		setUp();
+		JSONArray itemsArray=new JSONArray();
+		Opportunity[] opportunityArray=new Opportunity[itemsArray.length()];
 		//When
 		try {
-			JsonParser.parseJSONstring(jsonString);
-			JsonParser.getContentInformation();
+			itemsArray=JsonParser.parseJSONstring(jsonString);
+			opportunityArray=JsonParser.getContentInformation(itemsArray);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Arrays.sort(JsonParser.opportunityArray,Opportunity.TitleComparator);
-		//Now the order has changed
-		assertEquals("Breaking the test", JsonParser.opportunityArray[0].getTitle());
-		assertEquals("My first post", JsonParser.opportunityArray[1].getTitle());
-		assertEquals("Second Post", JsonParser.opportunityArray[2].getTitle());
+		Arrays.sort(opportunityArray,Opportunity.TitleComparator);
+		//Then the order has changed
+		assertEquals("My first post", opportunityArray[1].getTitle());
+		assertEquals("Second Post", opportunityArray[2].getTitle());
+		assertEquals("Breaking the test", opportunityArray[0].getTitle());
 	}
 	
 	@Test
 	public void numberOfHintsPerContent() {
 		//Having
 		setUp();
+		JSONArray itemsArray=new JSONArray();
+		Opportunity[] opportunityArray=new Opportunity[itemsArray.length()];
 		//When
 		try {
-			JsonParser.parseJSONstring(jsonString);
-			JsonParser.getContentInformation();
+			itemsArray=JsonParser.parseJSONstring(jsonString);
+			opportunityArray=JsonParser.getContentInformation(itemsArray);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int [] hints=new int [JsonParser.opportunityArray.length];
-		for (int i = 0; i < JsonParser.opportunityArray.length; i++) {
-			hints[i]=JsonParser.opportunityArray[i].getHits();
+		int [] hints=new int [opportunityArray.length];
+		for (int i = 0; i < opportunityArray.length; i++) {
+			hints[i]=opportunityArray[i].getHits();
 		}
 		int [] hintsExpected={10014,3001,5269};
 		assertArrayEquals(hintsExpected, hints);
@@ -101,19 +109,21 @@ public class JsonParserTest {
 	public void hitsInDescendingOrder() {
 		//Having
 		setUp();
+		JSONArray itemsArray=new JSONArray();
+		Opportunity[] opportunityArray=new Opportunity[itemsArray.length()];
 		//When
 		try {
-			JsonParser.parseJSONstring(jsonString);
-			JsonParser.getContentInformation();
+			itemsArray=JsonParser.parseJSONstring(jsonString);
+			opportunityArray=JsonParser.getContentInformation(itemsArray);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int [] hints=new int [JsonParser.opportunityArray.length];
+		int [] hints=new int [opportunityArray.length];
 		//Sort the array by number of hints
-		Arrays.sort(JsonParser.opportunityArray);
-		for (int i = 0; i < JsonParser.opportunityArray.length; i++) {
-			hints[i]=JsonParser.opportunityArray[i].getHits();
+		Arrays.sort(opportunityArray);
+		for (int i = 0; i < opportunityArray.length; i++) {
+			hints[i]=opportunityArray[i].getHits();
 		}
 		
 		int [] hintsExpected={10014,5269,3001};

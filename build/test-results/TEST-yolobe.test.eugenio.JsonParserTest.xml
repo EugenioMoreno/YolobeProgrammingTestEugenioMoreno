@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="yolobe.test.eugenio.JsonParserTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-02-29T10:22:49" hostname="Uge_portatil" time="0.054">
+<testsuite name="yolobe.test.eugenio.JsonParserTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-02-29T14:04:24" hostname="Uge_portatil" time="0.033">
   <properties/>
-  <testcase name="threeDifferentItems" classname="yolobe.test.eugenio.JsonParserTest" time="0.018"/>
-  <testcase name="opportunityTitles" classname="yolobe.test.eugenio.JsonParserTest" time="0.025"/>
+  <testcase name="threeDifferentItems" classname="yolobe.test.eugenio.JsonParserTest" time="0.016"/>
+  <testcase name="opportunityTitles" classname="yolobe.test.eugenio.JsonParserTest" time="0.008"/>
   <testcase name="alphabeticalOrderTitles" classname="yolobe.test.eugenio.JsonParserTest" time="0.001"/>
-  <testcase name="hitsInDescendingOrder" classname="yolobe.test.eugenio.JsonParserTest" time="0.005"/>
-  <testcase name="numberOfHintsPerContent" classname="yolobe.test.eugenio.JsonParserTest" time="0.002"/>
-  <system-out><![CDATA[CORREMOS EL TEST!!!!
-CORREMOS EL TEST!!!!
-CORREMOS EL TEST!!!!
-CORREMOS EL TEST!!!!
-CORREMOS EL TEST!!!!
-]]></system-out>
+  <testcase name="hitsInDescendingOrder" classname="yolobe.test.eugenio.JsonParserTest" time="0.004"/>
+  <testcase name="numberOfHintsPerContent" classname="yolobe.test.eugenio.JsonParserTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

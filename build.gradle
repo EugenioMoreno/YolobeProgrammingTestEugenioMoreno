@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'eclipse'
 mainClassName = "yolobe.test.eugenio.JsonParser"
 
 sourceCompatibility = 1.8
@@ -23,6 +24,7 @@ dependencies {
 
 test {
     systemProperties 'property': 'value'
+    
     useJUnit {
         excludeCategories 'yolobe.test.eugenio.JsonParserTest'
     }
@@ -44,15 +46,4 @@ run {
     if ( project.hasProperty("appArgs") ) {
         args Eval.me(appArgs)
     }
-}
-
-sourceSets {
-    intTest
-}
-task intTestJar(type: Jar) {
-    from sourceSets.intTest.output
-}
-task intTest(type: Test) {
-    testClassesDir = sourceSets.intTest.output.classesDir
-    classpath = sourceSets.intTest.runtimeClasspath
 }
