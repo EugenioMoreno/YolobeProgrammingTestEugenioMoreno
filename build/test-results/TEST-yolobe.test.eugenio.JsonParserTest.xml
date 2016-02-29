@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="yolobe.test.eugenio.JsonParserTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-02-29T09:48:22" hostname="Uge_portatil" time="0.032">
+  <properties/>
+  <testcase name="threeDifferentItems" classname="yolobe.test.eugenio.JsonParserTest" time="0.021"/>
+  <testcase name="opportunityTitles" classname="yolobe.test.eugenio.JsonParserTest" time="0.004"/>
+  <testcase name="alphabeticalOrderTitles" classname="yolobe.test.eugenio.JsonParserTest" time="0.001"/>
+  <testcase name="hitsInDescendingOrder" classname="yolobe.test.eugenio.JsonParserTest" time="0.004"/>
+  <testcase name="numberOfHintsPerContent" classname="yolobe.test.eugenio.JsonParserTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

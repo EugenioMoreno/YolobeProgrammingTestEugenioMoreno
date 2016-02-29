@@ -35,7 +35,7 @@ public class JsonParser {
 		while (scan.hasNext()){
 			str += scan.nextLine();
 		}
-		System.out.println(str);
+		//System.out.println(str);
 		scan.close();
 		
 		parseJSONstring(str);
