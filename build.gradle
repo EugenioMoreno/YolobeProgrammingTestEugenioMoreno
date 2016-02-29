@@ -23,6 +23,9 @@ dependencies {
 
 test {
     systemProperties 'property': 'value'
+    useJUnit {
+        excludeCategories 'yolobe.test.eugenio.JsonParserTest'
+    }
 }
 
 uploadArchives {
@@ -32,11 +35,24 @@ uploadArchives {
        }
     }
 }
+
 //Command line for running the pogramm:
 //gradle run -Pargs="['http://platform-test.yolobe.com:8080/api1/discover']"
 //URL arg0=http://platform-test.yolobe.com:8080/api1/discover
+
 run {
     if ( project.hasProperty("appArgs") ) {
         args Eval.me(appArgs)
     }
+}
+
+sourceSets {
+    intTest
+}
+task intTestJar(type: Jar) {
+    from sourceSets.intTest.output
+}
+task intTest(type: Test) {
+    testClassesDir = sourceSets.intTest.output.classesDir
+    classpath = sourceSets.intTest.runtimeClasspath
 }

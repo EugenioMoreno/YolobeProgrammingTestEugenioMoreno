@@ -80,5 +80,19 @@ public class Opportunity implements Comparable<Opportunity> {
 			//Ascending
 			//return this.hits-compareQuantity;
 		}
+		/**
+		 * Prints the title and the amount of hits of the opportunity
+		 */
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			
+			String titleHits=
+					"Opportunity title: "+
+					getTitle()+". "+
+					"Average number of hits: "+
+					getHits();
+			return titleHits;
+		}
 
 }

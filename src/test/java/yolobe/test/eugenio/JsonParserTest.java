@@ -16,11 +16,12 @@ import org.junit.Test;
  */
 public class JsonParserTest {
 	private static String jsonString;
+	
 	/**
 	 * Initialize the string with a JSON file with 3 opportunities
 	 */
 	private void setUp() {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub	
 		jsonString=new String("{\"info\":{\"api\":\"0.1\",\"incompatible\":\"/update\"},\"items\":[{\"id\":1548,\"content\":{\"id\":1548,\"field1\":\"First field\",\"field2\":\"Second field\",\"field3\":\"Thrid field.\",\"field4\":null,\"field5\":null,\"hits\":10014,\"tags\":[\"tempor\",\"invidunt\"],\"template\":\"card1\",\"title\":\"My first post\",\"media1\":{\"path\":\"URL1\"},\"media2\":{\"path\":\"URL2\"}},\"network\":{\"id\":5,\"name\":\"7th Street Church\"},\"user\":{\"id\":12,\"name\":\"Ulrike Duval\",\"profile\":{\"path\":\"URL3\"}}},{\"id\":1549,\"content\":{\"id\":1549,\"field1\":\"First field\",\"field2\":\"Second field\",\"field3\":\"Third field.\",\"field4\":null,\"field5\":null,\"hits\":3001,\"tags\":[\"et\"],\"template\":\"card1\",\"title\":\"Second Post\",\"media1\":{\"path\":\"URL4\"},\"media2\":{\"path\":\"URL5\"}},\"network\":{\"id\":6,\"name\":\"Breman High School\"},\"user\":{\"id\":6,\"name\":\"Lara Rozelle\",\"profile\":{\"path\":\"URL6\"}}},{\"id\":1550,\"content\":{\"id\":1550, \"field1\":\"First field\",\"field2\":\"Second field\",\"field3\":\"Third field.\",\"field4\":null,\"field5\":null,\"hits\":5269,\"tags\":[\"dolore\"],\"template\":\"card1\",\"title\":\"Breaking the test\",\"media1\":{\"path\":\"URL7\"},\"media2\":{\"path\":\"URL9\"}},\"network\":{\"id\":6,\"name\":\"Breman High School\"},\"user\":{\"id\":9,\"name\":\"Bridgett Lujan\",\"profile\":{\"path\":\"URL9\"}}}]}");
 	}
 	

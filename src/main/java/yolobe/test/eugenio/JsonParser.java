@@ -55,11 +55,7 @@ public class JsonParser {
 		Arrays.sort(opportunityArray,Opportunity.TitleComparator);
 		for (int i = 0; i < opportunityArray.length; i++) {
 			
-			System.out.println(
-					"Opportunity title: "+
-					opportunityArray[i].getTitle()+". "+
-					"Average number of hits: "+
-					opportunityArray[i].getHits());
+			System.out.println(opportunityArray[i].toString());
 		}
 		
 	}
